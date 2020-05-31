@@ -31,7 +31,7 @@ public class SearchService {
 		return buildingRepo.findByValueGreaterThanSorted(value);
 	}
 	
-
-
-	
+	public List<Building> getSimilarBuildings(String city, String street, String property_type){
+		return buildingRepo.findByParam(city, street, property_type);
+	}
 }

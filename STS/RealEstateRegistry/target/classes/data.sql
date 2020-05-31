@@ -9,7 +9,7 @@ INSERT INTO PROPERTY (property_id, property_type, tax_rate) VALUES
 						(3,'Industrial',0.153),
 						(4,'Loft',0.124);
 
-INSERT INTO BUILDING (id, city, street, number, size, value,owner_id, property_id) VALUES
+INSERT INTO BUILDING (id, city, street, number, size, value, owner_id, property_id) VALUES
 							(1, 'Vilnius', 'Taikos', 110, 25, 3000, 1, 1),
 							(2, 'Vilnius', 'Taikos', 143, 42, 4700, 1, 1),
 							(3, 'Vilnius', 'Taikos', 37, 73, 1500, 2, 2),

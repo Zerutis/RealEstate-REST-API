@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zerutis.task.model.Building;
@@ -61,6 +62,13 @@ public class BuildingController
 		return searchService.getBuildingsGreater(value);
 	}
 	
-
+	@GetMapping("/building/similar")
+	public List<Building> getSimilarBuildings(
+			@RequestParam("city") String city,
+			@RequestParam("street") String street,
+			@RequestParam("property_type") String property_type)
+	{
+		return searchService.getSimilarBuildings(city, street, property_type);
+	}
 	
 }

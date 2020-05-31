@@ -6,11 +6,14 @@ import org.springframework.stereotype.Service;
 import com.zerutis.task.dao.OwnerRepo;
 
 @Service
-public class TaxCalculationService {
-	
+public class TaxCalculationService 
+{
 	@Autowired
 	OwnerRepo ownerRepo;
 	
-
 	
+	public double getTotalTax(int Id)
+	{
+		return ownerRepo.findTaxById(Id);
+	}
 }

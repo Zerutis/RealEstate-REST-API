@@ -39,19 +39,6 @@ public class Building
 	private double size;
 	@Column(name = "value")
 	private double value;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Building )) return false;
-        if (!(o instanceof Property)) return false;
-        return id != 0 && (id == (((Building) o).getId()) || id == (((Property) o).getId()));
-    }
- 
-    @Override
-    public int hashCode() {
-        return 31;
-    }
 	
 	public int getId() {
 		return id;
@@ -111,10 +98,4 @@ public class Building
 		return "Building [id=" + id + ", owner=" + owner + ", property=" + property + ", city=" + city + ", street=" + street
 				+ ", number=" + number + ", size=" + size + ", value=" + value + "]";
 	}
-	
-	
-	
-	//public double taxValue() {
-	//	return type.calculateTaxValue(value);
-	//}
 }
