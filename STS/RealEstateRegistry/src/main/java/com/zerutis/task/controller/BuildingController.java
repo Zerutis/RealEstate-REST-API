@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zerutis.task.model.Building;
-import com.zerutis.task.service.CRUDservice;
+import com.zerutis.task.service.BuildingService;
 import com.zerutis.task.service.SearchService;
 
 @RestController
 public class BuildingController
 {
 	@Autowired
-	CRUDservice crudService;
+	BuildingService buildingService;
 	
 	@Autowired
 	SearchService searchService;
@@ -29,31 +29,31 @@ public class BuildingController
 	@PostMapping("/building")
 	public Building addBuilding(@RequestBody Building building)
 	{
-		return crudService.addBuilding(building);
+		return buildingService.addBuilding(building);
 	}
 	
 	@PutMapping("/building")
 	public Building saveOrUpdateBuilding(@RequestBody Building building)
 	{
-		return crudService.addBuilding(building);
+		return buildingService.addBuilding(building);
 	}
 	
 	@DeleteMapping("/building/{id}")
 	public String deleteBuilding(@PathVariable("id") int id)
 	{
-		return crudService.deleteBuilding(id);
+		return buildingService.deleteBuilding(id);
 	}
 	
 	@GetMapping("/buildings")
 	public List<Building> getBuildings()
 	{
-		return crudService.getBuildings();
+		return buildingService.getBuildings();
 	}
 	
 	@GetMapping("/building/{id}")
 	public Optional<Building> getBuilding(@PathVariable("id") int id)
 	{
-		return crudService.getBuildingById(id);
+		return buildingService.getBuildingById(id);
 	}
 	
 	@GetMapping("/building/value/{value}")

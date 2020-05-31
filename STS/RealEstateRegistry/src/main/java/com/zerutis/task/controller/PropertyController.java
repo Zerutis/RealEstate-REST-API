@@ -13,41 +13,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zerutis.task.model.Property;
-import com.zerutis.task.service.CRUDservice;
+import com.zerutis.task.service.PropertyService;
 
 @RestController
 public class PropertyController {
 
 	@Autowired
-	CRUDservice crudService;
+	PropertyService propertyService;
 	
 	@PostMapping("/property")
 	public Property addProperty(@RequestBody Property property)
 	{
-		return crudService.addProperty(property);
+		return propertyService.addProperty(property);
 	}
 	
 	@PutMapping("/property")
 	public Property saveOrUpdateProperty(@RequestBody Property property)
 	{
-		return crudService.addProperty(property);
+		return propertyService.addProperty(property);
 	}
 	
 	@DeleteMapping("/property/{id}")
 	public String deleteProperty(@PathVariable("id") int id)
 	{	
-		return crudService.deleteProperty(id);
+		return propertyService.deleteProperty(id);
 	}
 	
 	@GetMapping("/properties")
 	public List<Property> getProperties()
 	{
-		return crudService.getProperties();
+		return propertyService.getProperties();
 	}
 	
 	@GetMapping("/property/{id}")
 	public Optional<Property> getProperty(@PathVariable("id") int id)
 	{
-		return crudService.getPropertyById(id);
+		return propertyService.getPropertyById(id);
 	}
 }
