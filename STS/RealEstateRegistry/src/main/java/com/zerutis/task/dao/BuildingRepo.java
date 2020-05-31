@@ -10,8 +10,6 @@ import com.zerutis.task.model.Building;
 
 public interface BuildingRepo extends JpaRepository<Building, Integer>
 {
-	@Query(value = "Select b From Building b where b.value > ?1 order by b.value")
-	List<Building> findByValueGreaterThanSorted(double value);
 	
 	@Query(value = "with similarAddress "
 	        + "as (Select TOP 3 b.* from building b, property p "
@@ -20,10 +18,11 @@ public interface BuildingRepo extends JpaRepository<Building, Integer>
 			+ "and street = :street "
 			+ "and p.property_type = :property_type "
 			+ "order by value) "
-			+ "select TOP 3 *, ABS(size - 32) as diff "
+			+ "select TOP 3 *, ABS(size - :size) as diff "
 			+ "from similarAddress " 
 			+ "order by diff, value desc", nativeQuery = true)
 	List<Building> findByParam(@Param("city") String city,
 							   @Param("street") String street,
-							   @Param("property_type") String property_type);
+							   @Param("property_type") String property_type,
+							   @Param("size") double size);
 }

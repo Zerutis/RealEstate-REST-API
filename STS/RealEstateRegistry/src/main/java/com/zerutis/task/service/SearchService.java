@@ -24,14 +24,7 @@ public class SearchService {
 	@Autowired
 	PropertyRepo propertyRepo;
 	
-	
-	
-	public List<Building> getBuildingsGreater(double value)
-	{
-		return buildingRepo.findByValueGreaterThanSorted(value);
-	}
-	
-	public List<Building> getSimilarBuildings(String city, String street, String property_type){
-		return buildingRepo.findByParam(city, street, property_type);
+	public List<Building> getSimilarBuildings(String city, String street, String property_type, double size){
+		return buildingRepo.findByParam(city, street, property_type, size);
 	}
 }

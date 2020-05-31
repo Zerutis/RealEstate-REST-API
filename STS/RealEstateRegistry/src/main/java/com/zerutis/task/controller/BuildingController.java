@@ -56,19 +56,14 @@ public class BuildingController
 		return buildingService.getBuildingById(id);
 	}
 	
-	@GetMapping("/building/value/{value}")
-	public List<Building> getBuildings(@PathVariable("value") double value)
-	{
-		return searchService.getBuildingsGreater(value);
-	}
-	
 	@GetMapping("/building/similar")
 	public List<Building> getSimilarBuildings(
 			@RequestParam("city") String city,
 			@RequestParam("street") String street,
-			@RequestParam("property_type") String property_type)
+			@RequestParam("property_type") String property_type,
+			@RequestParam("size") double size)
 	{
-		return searchService.getSimilarBuildings(city, street, property_type);
+		return searchService.getSimilarBuildings(city, street, property_type, size);
 	}
 	
 }
