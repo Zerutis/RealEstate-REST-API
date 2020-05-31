@@ -12,48 +12,42 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zerutis.task.dao.PropertyRepo;
 import com.zerutis.task.model.Property;
+import com.zerutis.task.service.CRUDservice;
 
 @RestController
 public class PropertyController {
 
 	@Autowired
-	PropertyRepo repo;
+	CRUDservice crudService;
 	
-	@PostMapping(path="/property", consumes = {"application/json"})
+	@PostMapping("/property")
 	public Property addProperty(@RequestBody Property property)
 	{
-		repo.save(property);
-		return property;
+		return crudService.addProperty(property);
 	}
 	
-	@PutMapping(path="/property", consumes = {"application/json"})
+	@PutMapping("/property")
 	public Property saveOrUpdateProperty(@RequestBody Property property)
 	{
-		repo.save(property);
-		return property;
+		return crudService.addProperty(property);
 	}
 	
 	@DeleteMapping("/property/{id}")
 	public String deleteProperty(@PathVariable("id") int id)
-	{
-		Property property = repo.getOne(id);
-		
-		repo.delete(property);
-		
-		return "Property deleted";
+	{	
+		return crudService.deleteProperty(id);
 	}
 	
 	@GetMapping("/properties")
 	public List<Property> getProperties()
 	{
-		return repo.findAll();
+		return crudService.getProperties();
 	}
 	
 	@GetMapping("/property/{id}")
 	public Optional<Property> getProperty(@PathVariable("id") int id)
 	{
-		return repo.findById(id);
+		return crudService.getPropertyById(id);
 	}
 }

@@ -12,65 +12,55 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zerutis.task.dao.BuildingRepo;
 import com.zerutis.task.model.Building;
+import com.zerutis.task.service.CRUDservice;
 import com.zerutis.task.service.SearchService;
 
 @RestController
 public class BuildingController
 {
 	@Autowired
-	BuildingRepo repo;
+	CRUDservice crudService;
 	
 	@Autowired
-	SearchService SearchS;
+	SearchService searchService;
 	
-	@PostMapping(path="/building", consumes = {"application/json"})
+	@PostMapping("/building")
 	public Building addBuilding(@RequestBody Building building)
 	{
-		repo.save(building);
-		return building;
+		return crudService.addBuilding(building);
 	}
 	
-	@PutMapping(path="/building", consumes = {"application/json"})
+	@PutMapping("/building")
 	public Building saveOrUpdateBuilding(@RequestBody Building building)
 	{
-		repo.save(building);
-		return building;
+		return crudService.addBuilding(building);
 	}
 	
 	@DeleteMapping("/building/{id}")
 	public String deleteBuilding(@PathVariable("id") int id)
 	{
-		Building building = repo.getOne(id);
-		
-		repo.delete(building);
-		
-		return "Building deleted";
+		return crudService.deleteBuilding(id);
 	}
 	
 	@GetMapping("/buildings")
 	public List<Building> getBuildings()
 	{
-		return repo.findAll();
+		return crudService.getBuildings();
 	}
 	
 	@GetMapping("/building/{id}")
 	public Optional<Building> getBuilding(@PathVariable("id") int id)
 	{
-		return repo.findById(id);
+		return crudService.getBuildingById(id);
 	}
 	
-	@GetMapping("/building/similar/{city}/{street}/{number}/{property_type}/{size}")
-	public List<Building> getSimilarBuildings(
-			@PathVariable("city") String city,
-			@PathVariable("street") String street,
-			@PathVariable("number") int number,
-			@PathVariable("property_type") String property_type,
-			@PathVariable("size") double size)
+	@GetMapping("/building/value/{value}")
+	public List<Building> getBuildings(@PathVariable("value") double value)
 	{
-		return SearchS.getSimilarBuilding(repo.findAll(), city, street, number, property_type, size);
+		return searchService.getBuildingsGreater(value);
 	}
 	
 
+	
 }

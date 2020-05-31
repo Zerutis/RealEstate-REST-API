@@ -12,60 +12,60 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zerutis.task.dao.OwnerRepo;
 import com.zerutis.task.model.Owner;
+import com.zerutis.task.service.CRUDservice;
+import com.zerutis.task.service.SearchService;
 import com.zerutis.task.service.TaxCalculationService;
 
 @RestController
 public class OwnerController {
 
 	@Autowired
-	OwnerRepo repo;
+	TaxCalculationService taxCalculationService;
 	
 	@Autowired
-	TaxCalculationService taxCS;
+	SearchService searchService;
+	
+	@Autowired
+	CRUDservice crudService;
 
 	
-	@PostMapping(path="/owner", consumes = {"application/json"})
+	@PostMapping("/owner")
 	public Owner addOwner(@RequestBody Owner owner)
 	{
-		repo.save(owner);
-		return owner;
+		return crudService.addOwner(owner);
 	}
 	
-	@PutMapping(path="/owner", consumes = {"application/json"})
+	@PutMapping("/owner")
 	public Owner saveOrUpdateOwner(@RequestBody Owner owner)
 	{
-		repo.save(owner);
-		return owner;
+		return crudService.addOwner(owner);
 	}
 	
 	@DeleteMapping("/owner/{id}")
 	public String deleteOwner(@PathVariable("id") int id)
 	{
-		Owner owner = repo.getOne(id);
-		
-		repo.delete(owner);
-		
-		return "Owner deleted";
+		return crudService.deleteOwner(id);
 	}
 	
 	@GetMapping("/owners")
 	public List<Owner> getOwners()
 	{
-		return repo.findAll();
+		return crudService.getOwners();
 	}
 	
 	@GetMapping("/owner/{id}")
 	public Optional<Owner> getOwner(@PathVariable("id") int id)
 	{
-		return repo.findById(id);
+		return crudService.getOwnerById(id);
 	}
+	
+
 	
 	@GetMapping("/owner/{id}/totalTax")
 	public double getOwnerTotalTax(@PathVariable("id") int id)
 	{
-		return taxCS.getTotalTax(repo.findById(id).get().getBuildings());
+		return 15;
 	}
 	
 
