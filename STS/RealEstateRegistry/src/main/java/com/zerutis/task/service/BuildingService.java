@@ -27,10 +27,10 @@ public class BuildingService {
 	
 	public Building addBuilding(Building building, int owner_id, int property_id)
 	{
-		Optional<Owner> owner = ownerRepo.findById(owner_id);
-		Optional<Property> property = propertyRepo.findById(property_id);
-		building.setOwner(owner.get());
-		building.setProperty(property.get());
+		Owner owner = ownerRepo.findById(owner_id).orElse(new Owner());
+		Property property = propertyRepo.findById(property_id).orElse(new Property());
+		building.setOwner(owner);
+		building.setProperty(property);
 		buildingRepo.save(building);
 		return building;
 	}

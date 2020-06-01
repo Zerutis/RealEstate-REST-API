@@ -15,10 +15,14 @@ public class TaxCalculationService
 	
 	public double calculateTotalTax(List<Double> value, List<Double> tax_rate) {
 		int n = value.size();
+		if(n > tax_rate.size()) {
+			n = tax_rate.size();
+		}
 		double tax = 0.0;
 		for(int i = 0; i < n; i++) {
-			tax += value.get(i).doubleValue() * tax_rate.get(i).doubleValue();
+			tax += Math.abs(value.get(i).doubleValue() * tax_rate.get(i).doubleValue());
 		}
+		tax = Math.round(tax * 100.0) / 100.0;
 		return tax;
 	}
 	

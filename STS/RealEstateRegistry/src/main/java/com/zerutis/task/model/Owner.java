@@ -53,10 +53,6 @@ public class Owner
 		this.buildings = buildings;
 	}
 	
-	public void addBuilding(Building building) {
-		buildings.add(building);
-	}
-	
 	@Override
 	public String toString() {
 		return "Owner [id=" + id + ", name=" + name + ", buildings=" + buildings + "]";
