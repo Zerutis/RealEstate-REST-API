@@ -14,18 +14,16 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @Entity(name="Owner")
 @Table(name="owner")
-
-@JsonDeserialize
 public class Owner
 {
+	@Column(name = "owner_id")
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
 	private Integer id;
+	
 	@Column(name = "name")
 	private String name;
 
@@ -53,6 +51,10 @@ public class Owner
 	}
 	public void setBuildings(List<Building> buildings) {
 		this.buildings = buildings;
+	}
+	
+	public void addBuilding(Building building) {
+		buildings.add(building);
 	}
 	
 	@Override

@@ -18,10 +18,9 @@ public class Building
 {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int id;
+	@Column(name = "building_id")
+	private Integer id;
 	
-
 	@ManyToOne
 	@JoinColumn(name="owner_id")
 	@JsonBackReference(value = "owner")
@@ -61,7 +60,7 @@ public class Building
 		return property;
 	}
 
-	public void setType(Property property) {
+	public void setProperty(Property property) {
 		this.property = property;
 	}
 

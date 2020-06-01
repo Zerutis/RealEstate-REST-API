@@ -13,7 +13,7 @@ public class TaxCalculationService
 	@Autowired
 	OwnerRepo ownerRepo;
 	
-	private double calculateTotalTax(List<Double> value, List<Double> tax_rate) {
+	public double calculateTotalTax(List<Double> value, List<Double> tax_rate) {
 		int n = value.size();
 		double tax = 0.0;
 		for(int i = 0; i < n; i++) {

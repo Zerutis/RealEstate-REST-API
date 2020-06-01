@@ -17,12 +17,12 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity(name="Property")
 @Table(name="property")
-public class Property {
-
-	@Column(name = "owner_id")
+public class Property
+{
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@Column(name = "property_id")
+	private Integer id;
 
 	@Column(name = "property_type")
 	private String property_type;

@@ -38,7 +38,6 @@ public class OwnerController {
 	@PostMapping(path = "/owner", consumes = "application/json", produces = "application/json")
 	public Owner addOwner(@RequestBody Owner owner)
 	{
-		System.out.println(owner.toString());
 		return ownerService.addOwner(owner);
 	}
 	

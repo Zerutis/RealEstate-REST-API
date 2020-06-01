@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.zerutis.task.dao.BuildingRepo;
 import com.zerutis.task.dao.OwnerRepo;
+import com.zerutis.task.dao.PropertyRepo;
 import com.zerutis.task.model.Building;
+import com.zerutis.task.model.Owner;
+import com.zerutis.task.model.Property;
 
 @Service
 public class BuildingService {
@@ -19,7 +22,15 @@ public class BuildingService {
 	@Autowired
 	OwnerRepo ownerRepo;
 	
-	public Building addBuilding(Building building) {
+	@Autowired
+	PropertyRepo propertyRepo;
+	
+	public Building addBuilding(Building building, int owner_id, int property_id)
+	{
+		Optional<Owner> owner = ownerRepo.findById(owner_id);
+		Optional<Property> property = propertyRepo.findById(property_id);
+		building.setOwner(owner.get());
+		building.setProperty(property.get());
 		buildingRepo.save(building);
 		return building;
 	}
