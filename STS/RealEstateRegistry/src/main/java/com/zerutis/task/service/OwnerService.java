@@ -16,6 +16,7 @@ public class OwnerService {
 	
 	public Owner addOwner(Owner owner) {
 		ownerRepo.save(owner);
+		System.out.println(ownerRepo.getOne(1));
 		return owner;
 	}
 	

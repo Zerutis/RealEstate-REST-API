@@ -14,21 +14,22 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @Entity(name="Owner")
 @Table(name="owner")
+
+@JsonDeserialize
 public class Owner
 {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "owner_id")
-	private int id;
+	@Column(name = "id")
+	private Integer id;
 	@Column(name = "name")
 	private String name;
-	@Column(name = "total_tax", columnDefinition = "double default 0.0")
-	private double totalTax;
 
-	@JsonManagedReference
+	@JsonManagedReference(value = "owner")
 	@OneToMany(mappedBy="owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 	private List<Building> buildings = new ArrayList<>();
 	
@@ -52,19 +53,11 @@ public class Owner
 	}
 	public void setBuildings(List<Building> buildings) {
 		this.buildings = buildings;
-	}	
-	
-	public double getTotalTax() {
-		return totalTax;
 	}
-	public void setTotalTax(double totalTax) {
-		this.totalTax = totalTax;
-	}
-
 	
 	@Override
 	public String toString() {
-		return "Owner [id=" + id + ", name=" + name + ", totalTax=" + totalTax + ", buildings=" + buildings + "]";
+		return "Owner [id=" + id + ", name=" + name + ", buildings=" + buildings + "]";
 	}
 	
 	

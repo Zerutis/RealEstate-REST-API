@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zerutis.task.model.Building;
@@ -26,9 +27,13 @@ public class BuildingController
 	@Autowired
 	SearchService searchService;
 	
-	@PostMapping("/building")
-	public Building addBuilding(@RequestBody Building building)
+	@PostMapping("/building/{owner_id}/{property_id}")
+	public Building addBuilding(
+			@RequestBody Building building,
+			@PathVariable("owner_id") int owner_id,
+			@PathVariable("property_id") int property_id)
 	{
+		System.out.println(owner_id + property_id);
 		return buildingService.addBuilding(building);
 	}
 	

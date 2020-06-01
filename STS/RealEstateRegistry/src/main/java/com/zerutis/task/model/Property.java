@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,9 +18,10 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity(name="Property")
 @Table(name="property")
 public class Property {
+
+	@Column(name = "owner_id")
 	@Id 
-	@GeneratedValue
-	@Column(name = "property_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@Column(name = "property_type")
@@ -27,7 +29,7 @@ public class Property {
 	@Column(name  = "tax_rate")
 	private double taxRate;
 	
-	@JsonManagedReference
+	@JsonManagedReference(value = "property")
 	@OneToMany(mappedBy="property", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 	private List<Building> buildings = new ArrayList<>();
 

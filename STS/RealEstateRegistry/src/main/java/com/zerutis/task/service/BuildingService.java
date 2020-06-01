@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zerutis.task.dao.BuildingRepo;
+import com.zerutis.task.dao.OwnerRepo;
 import com.zerutis.task.model.Building;
 
 @Service
@@ -14,6 +15,9 @@ public class BuildingService {
 	
 	@Autowired
 	BuildingRepo buildingRepo;
+	
+	@Autowired
+	OwnerRepo ownerRepo;
 	
 	public Building addBuilding(Building building) {
 		buildingRepo.save(building);

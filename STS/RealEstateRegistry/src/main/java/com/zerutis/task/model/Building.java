@@ -3,6 +3,7 @@ package com.zerutis.task.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,17 +17,19 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class Building 
 {
 	@Id 
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int id;
 	
-	@JsonBackReference
+
 	@ManyToOne
 	@JoinColumn(name="owner_id")
+	@JsonBackReference(value = "owner")
 	private Owner owner;
 	
-	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="property_id")
+	@JsonBackReference(value = "property")
 	private Property property;
 	
 	@Column(name = "city")
