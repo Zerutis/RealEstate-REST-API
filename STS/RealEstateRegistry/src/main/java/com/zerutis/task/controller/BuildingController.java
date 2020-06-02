@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.zerutis.task.exception.ApiRequestException;
 import com.zerutis.task.model.Building;
 import com.zerutis.task.service.BuildingService;
 import com.zerutis.task.service.SearchService;
@@ -53,13 +54,22 @@ public class BuildingController
 	@GetMapping("/buildings")
 	public List<Building> getBuildings()
 	{
-		return buildingService.getBuildings();
+		List<Building> buildings = buildingService.getBuildings();
+		if (buildings.isEmpty()) {
+			throw new ApiRequestException("There is no buildings");
+		}
+		return buildings;
 	}
 	
 	@GetMapping("/building/{id}")
 	public Optional<Building> getBuilding(@PathVariable("id") int id)
 	{
-		return buildingService.getBuildingById(id);
+		Optional<Building> building = buildingService.getBuildingById(id);
+		if (building.isEmpty()) {
+			throw new ApiRequestException("There is no building by ID: " + id);
+		}
+		
+		return building;
 	}
 	
 	@GetMapping("/building/similar")

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.zerutis.task.exception.ApiRequestException;
 import com.zerutis.task.model.Owner;
 import com.zerutis.task.service.OwnerService;
 import com.zerutis.task.service.SearchService;
@@ -62,7 +63,12 @@ public class OwnerController {
 	@GetMapping("/owner/{id}")
 	public Optional<Owner> getOwner(@PathVariable("id") int id)
 	{
-		return ownerService.getOwnerById(id);
+		Optional<Owner> owner = ownerService.getOwnerById(id);
+		if (owner.isEmpty()) {
+			throw new ApiRequestException("There is no own by ID: " + id);
+		}
+		
+		return owner;
 	}
 	
 	@GetMapping("/owner/tax")

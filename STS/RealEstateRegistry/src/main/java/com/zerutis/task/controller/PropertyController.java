@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.zerutis.task.exception.ApiRequestException;
 import com.zerutis.task.model.Property;
 import com.zerutis.task.service.PropertyService;
 
@@ -48,6 +49,10 @@ public class PropertyController {
 	@GetMapping("/property/{id}")
 	public Optional<Property> getProperty(@PathVariable("id") int id)
 	{
-		return propertyService.getPropertyById(id);
+		Optional<Property> property = propertyService.getPropertyById(id);
+		if (property.isEmpty()) {
+			throw new ApiRequestException("There is no property by ID: " + id);
+		}
+		return property;
 	}
 }
